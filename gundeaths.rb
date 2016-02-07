@@ -18,5 +18,19 @@ require 'csv'
  ##types as categories on the x-axis and the death #'s represented on the y-axis for a given year. If I'm comparing two years, the categories can be shown 
  ##with their bars side by side, as is typical. Later, I can get to displaying specific weapon fatalities over time - but not yet. 
  
- Struct.new("Row",:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown)
+Row = Struct.new(:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown) do
+	def initialize(csv)
+		unless csv.is_a? Array or csv.is_a? CSV
+			raise ArgumentError, "cannot read in spreadsheet data from a #{csv.class}"
+		end 
+		puts csv
+		##Take each value from the csv Array and copy it to the corresponding entry in the Struct
+		csv.each do 
+			|x, value| self.members[x][value] = csv[x].to_i
+		end
+	end
+end
 f.each {|x| print x}
+puts f[2][2]
+row2003 = Row.new(f[1])
+print row2003
