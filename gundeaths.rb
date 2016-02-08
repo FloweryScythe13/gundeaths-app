@@ -25,12 +25,22 @@ Row = Struct.new(:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown) do
 		end 
 		puts csv
 		##Take each value from the csv Array and copy it to the corresponding entry in the Struct
-		csv.each do 
-			|x, value| self.members[x][value] = csv[x].to_i
+		for index in 0..7 do
+			self[index] = csv[index]
 		end
+		# self[0] = csv[0]
+		# self[1] = csv[1]
+		# self[2] = csv[2]
+		# self[3] = csv[3]
+		# self[4] = csv[4]
+		# self[5] = csv[5]
+		# self[6] = csv[6]
+		# self[7] = csv[7] 
+		
+		
 	end
 end
 f.each {|x| print x}
 puts f[2][2]
 row2003 = Row.new(f[1])
-print row2003
+puts row2003.inspect
