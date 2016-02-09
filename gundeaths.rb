@@ -28,19 +28,46 @@ Row = Struct.new(:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown) do
 		for index in 0..7 do
 			self[index] = csv[index]
 		end
-		# self[0] = csv[0]
-		# self[1] = csv[1]
-		# self[2] = csv[2]
-		# self[3] = csv[3]
-		# self[4] = csv[4]
-		# self[5] = csv[5]
-		# self[6] = csv[6]
-		# self[7] = csv[7] 
+		 
 		
 		
 	end
 end
-f.each {|x| print x}
+
+def compareYears(y1, y2, weapon1, weapon2=weapon1)
+	unless (( (2003..2013) === y1.to_i) && ((2003..2013) === y2.to_i))
+		raise ArgumentError, "Year(s) selected for comparison must be between 2003 and 2013."
+	end 
+	##Get the values for the selected categories from the selected years and print them.
+	weapon1 = weapon1.downcase
+	weapon2 = weapon2.downcase
+	weapon1bool = false
+	weapon2bool = false
+	Row.each do |x|
+		weapon1bool = true if weapon1 === x 
+		weapon2bool = true if weapon2 === x 
+	end
+	unless weapon1bool == true && weapon2bool == true
+		raise ArgumentError, "Firearm selection must match one of the options given in the data. \nAvailable options are "\
+		"Hg, sg, rf, other, combo, noreport, and unknown. They are not caps sensitive."
+	end
+	i = nil;
+	j = nil;
+	for index in 0..records.length do 
+		i = index if records[index][:year] == y1 
+		
+		j = index if records[index][:year] == y2
+		
+	end
+	
+	puts "#{y1}: There were #{records[i]["#{weapon1}"]} fatalities involving a #{weapon1}."
+	puts "#{y2}: There were #{records[i]["#{weapon2}"]} fatalities involving a #{weapon2}."
+
+end
+
 puts f[2][2]
 row2003 = Row.new(f[1])
-puts row2003.inspect
+records = Array.new()
+f.each {|x| records.push(Row.new(x))}
+puts records.inspect
+compareYears(2004, 2005, "hg")
