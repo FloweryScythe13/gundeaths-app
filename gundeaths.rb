@@ -34,7 +34,7 @@ Row = Struct.new(:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown) do
 	end
 end
 
-def compareYears(y1, y2, weapon1, weapon2=weapon1)
+def compareYears(recs, y1, y2, weapon1, weapon2=weapon1)
 	unless (( (2003..2013) === y1.to_i) && ((2003..2013) === y2.to_i))
 		raise ArgumentError, "Year(s) selected for comparison must be between 2003 and 2013."
 	end 
@@ -43,25 +43,40 @@ def compareYears(y1, y2, weapon1, weapon2=weapon1)
 	weapon2 = weapon2.downcase
 	weapon1bool = false
 	weapon2bool = false
-	Row.each do |x|
-		weapon1bool = true if weapon1 === x 
-		weapon2bool = true if weapon2 === x 
+	for index in 0..7 do
+		if "#{weapon1}" === Row.members[index].to_s ##interestingly, converting a symbol into a string removes the leading colon from the output
+			weapon1bool = true
+		end
+		if "#{weapon2}" === Row.members[index].to_s
+			weapon2bool = true
+		end
 	end
+	puts "#{weapon1bool}, #{weapon2bool}, #{weapon1}, #{weapon2}"
 	unless weapon1bool == true && weapon2bool == true
 		raise ArgumentError, "Firearm selection must match one of the options given in the data. \nAvailable options are "\
 		"Hg, sg, rf, other, combo, noreport, and unknown. They are not caps sensitive."
 	end
-	i = nil;
-	j = nil;
-	for index in 0..records.length do 
-		i = index if records[index][:year] == y1 
+	i = nil
+	j = nil
+	k = 0
+	puts recs.inspect
+	puts recs.length
+	puts recs.class
+	recs.each do |x|
+		# puts x[:year].class --- note to self that because the attributes of a Row are set as SYMBOLS, the values you are iterating over are all STRINGS. 
+		# To check equivalence with compareYears' arguments, you need to convert them into integers first. Be more careful with your details!
+		if x[:year].to_i == y1
+			i = k
+		end
 		
-		j = index if records[index][:year] == y2
-		
+		if x[:year].to_i == y2
+			j = k 
+		end
+		k += 1
 	end
-	
-	puts "#{y1}: There were #{records[i]["#{weapon1}"]} fatalities involving a #{weapon1}."
-	puts "#{y2}: There were #{records[i]["#{weapon2}"]} fatalities involving a #{weapon2}."
+	# puts "i = #{i}, j = #{j}."
+	puts "#{y1}: There were #{recs[i]["#{weapon1}"]} fatalities involving a #{weapon1}."
+	puts "#{y2}: There were #{recs[j]["#{weapon2}"]} fatalities involving a #{weapon2}."
 
 end
 
@@ -69,5 +84,5 @@ puts f[2][2]
 row2003 = Row.new(f[1])
 records = Array.new()
 f.each {|x| records.push(Row.new(x))}
-puts records.inspect
-compareYears(2004, 2005, "hg")
+# puts records.inspect
+compareYears(records, 2004, 2005, "hg")
