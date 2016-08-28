@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rows</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Hg</th>
+      <th>Sg</th>
+      <th>Rf</th>
+      <th>Other</th>
+      <th>Combo</th>
+      <th>Noreport</th>
+      <th>Unknown</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rows.each do |row| %>
+      <tr>
+        <td><%= row.year %></td>
+        <td><%= row.hg %></td>
+        <td><%= row.sg %></td>
+        <td><%= row.rf %></td>
+        <td><%= row.other %></td>
+        <td><%= row.combo %></td>
+        <td><%= row.noReport %></td>
+        <td><%= row.unknown %></td>
+        <td><%= link_to 'Show', row %></td>
+        <td><%= link_to 'Edit', edit_row_path(row) %></td>
+        <td><%= link_to 'Destroy', row, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Row', new_row_path %>

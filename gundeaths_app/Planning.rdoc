@@ -1,0 +1,61 @@
+**CONCEPTS DEFINITION**
+
+The web application should display a graph of # of firearm-related deaths in category X vs some variable Y. 
+
+The user should be able to select different categories (e.g. sex of victim or type of firearm) and be shown data specific to the category chosen. 
+
+The user should be able to run a small number of basic statistical analysis techniques on the category of data selected, and be shown visual results of each analysis (with accompanying info on the technique or equation used and its Chi-squared fit to the data)
+
+The user should be able to change the range of values in the independent variable (such as only selecting years 2004-2008). 
+
+If feasible, the user could also select specific datasets to run through statistical analysis. 
+
+Manage Dataset for Analysis ---> Manage Independent Variable Category --->   Manage Independent Variable Range --->    Manage Statistical Analysis Technique for Data ---> Work With Visual Grapher
+
+
+
+
+**USER TASKS DEFINITION**
+
+Select Independent Variable Category --->  Select Independent Variable Range --->   Select Statistical Analysis Technique
+
+
+
+**OBJECTS DEFINITION** 
+
+From an abstract standpoint, the primary object of study in a statistical analysis is always a datapoint. The goal in abstract is to aggregate those datapoints and examine their values for correlations and other patterns across the entire set. So let's have the lowest object in this app be a datapoint, a row, an entry in the CDC data table. 
+
+We don't need to have a separate object to represent the entire dataset. That can simply be represented as an array of Rows (as I was doing previously), or with ActiveRecord etc etc. 
+
+We MAY want an object that contains supplementary data about a displayed dataset & analysis, such as the name of the analysis technique or equation used, the Chi-squared value, etc. 
+
+
+
+
+**ATTRIBUTES DEFINITION**
+
+Row: 
+    1. Year,Handgun.Number,Shotgun.Number,Rifle.Number,Other.Number,Combo.Number,Noreport.Number,Unknown.Number
+    2. # of handgun deaths
+    3. # of shotgun deaths
+    4. # of rifle deaths
+    5. # of deaths by other firearm
+    6. # of deaths by combination of firearms
+    7. # of deaths with no report
+    8. # of deaths where firearm used is unknown
+    
+SupplementalData:
+    1. Dataset name
+    2. Dataset source
+    3. Statistical Analysis Technique Used
+    4. Equation/Model for Statistical Analysis Technique Used
+    5. Chi-squared value 
+    
+    
+**ACTIONS DEFINITION**
+
+1. Select Dataset
+2. Edit Variables Selected From Dataset
+3. Run Statistical Analysis on Dataset
+
+

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: MyString
+  hg: 
+  sg: 
+  rf: 
+  other: 
+  combo: 
+  noReport: 
+  unknown: 
+
+two:
+  year: MyString
+  hg: 
+  sg: 
+  rf: 
+  other: 
+  combo: 
+  noReport: 
+  unknown: 

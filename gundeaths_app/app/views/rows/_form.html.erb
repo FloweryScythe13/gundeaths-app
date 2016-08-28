@@ -1,0 +1,49 @@
+<%= form_for(@row) do |f| %>
+  <% if @row.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@row.errors.count, "error") %> prohibited this row from being saved:</h2>
+
+      <ul>
+      <% @row.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :hg %><br>
+    <%= f.text_field :hg %>
+  </div>
+  <div class="field">
+    <%= f.label :sg %><br>
+    <%= f.text_field :sg %>
+  </div>
+  <div class="field">
+    <%= f.label :rf %><br>
+    <%= f.text_field :rf %>
+  </div>
+  <div class="field">
+    <%= f.label :other %><br>
+    <%= f.text_field :other %>
+  </div>
+  <div class="field">
+    <%= f.label :combo %><br>
+    <%= f.text_field :combo %>
+  </div>
+  <div class="field">
+    <%= f.label :noReport %><br>
+    <%= f.text_field :noReport %>
+  </div>
+  <div class="field">
+    <%= f.label :unknown %><br>
+    <%= f.text_field :unknown %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

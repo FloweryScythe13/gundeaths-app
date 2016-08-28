@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @row.year %>
+</p>
+
+<p>
+  <strong>Hg:</strong>
+  <%= @row.hg %>
+</p>
+
+<p>
+  <strong>Sg:</strong>
+  <%= @row.sg %>
+</p>
+
+<p>
+  <strong>Rf:</strong>
+  <%= @row.rf %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @row.other %>
+</p>
+
+<p>
+  <strong>Combo:</strong>
+  <%= @row.combo %>
+</p>
+
+<p>
+  <strong>Noreport:</strong>
+  <%= @row.noReport %>
+</p>
+
+<p>
+  <strong>Unknown:</strong>
+  <%= @row.unknown %>
+</p>
+
+<%= link_to 'Edit', edit_row_path(@row) %> |
+<%= link_to 'Back', rows_path %>
