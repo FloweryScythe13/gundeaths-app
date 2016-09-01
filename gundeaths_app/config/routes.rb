@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :rows
   get 'home/index'
+    
+    get ':title/data/:id' => 'rows#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

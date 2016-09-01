@@ -18,21 +18,21 @@ require 'csv'
  ##types as categories on the x-axis and the death #'s represented on the y-axis for a given year. If I'm comparing two years, the categories can be shown 
  ##with their bars side by side, as is typical. Later, I can get to displaying specific weapon fatalities over time - but not yet. 
  
-Row = Struct.new(:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown) do
-	def initialize(csv)
-		unless csv.is_a? Array or csv.is_a? CSV
-			raise ArgumentError, "cannot read in spreadsheet data from a #{csv.class}"
-		end 
-		puts csv
-		##Take each value from the csv Array and copy it to the corresponding entry in the Struct
-		for index in 0..7 do
-			self[index] = csv[index]
-		end
-		 
-		
-		
-	end
-end
+#Row = Struct.new(:year, :hg, :sg, :rf, :other, :combo, :noreport, :unknown) do
+#	def initialize(csv)
+#		unless csv.is_a? Array or csv.is_a? CSV
+#			raise ArgumentError, "cannot read in spreadsheet data from a #{csv.class}"
+#		end 
+#		puts csv
+#		##Take each value from the csv Array and copy it to the corresponding entry in the Struct
+#		for index in 0..7 do
+#			self[index] = csv[index]
+#		end
+#		 
+#		
+#		
+#	end
+#end
 
 def compareYears(recs, y1, y2, weapon1, weapon2=weapon1)
 	unless (( (2003..2013) === y1.to_i) && ((2003..2013) === y2.to_i))
@@ -85,4 +85,5 @@ row2003 = Row.new(f[1])
 records = Array.new()
 f.each {|x| records.push(Row.new(x))}
 # puts records.inspect
-compareYears(records, 2004, 2005, "hg")
+#compareYears(records, 2004, 2005, "hg")
+records.each {|x| x.save}
